@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 // actions
 import { fetchCar } from '../actions/index';
 import { fetchOwners } from '../actions/index';
-
+import { deleteCar } from '../actions/index';
 
 class CarsShow extends Component {
   componentWillMount() {
@@ -17,17 +17,21 @@ class CarsShow extends Component {
     }
   }
 
+  handleClick = () => {
+    this.props.deleteCar(this.props.history, this.props.car);
+  }
+
   render() {
     console.log("the show car:");
     console.log(this.props.car);
     if (this.props.car) {
       return (
         <div className="car-info">
-          <h1> hello </h1>
           <h1>{this.props.car["brand"]}</h1>
           <p>{this.props.car["model"]}</p>
           <p>{this.props.car["plate"]}</p>
           <p>{this.props.car["owner"]}</p>
+          <button onClick={this.handleClick} car={this.props.car}>Delete car</button>
         </div>
       );
     } else {
@@ -47,7 +51,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchCar: fetchCar, fetchOwners: fetchOwners }, dispatch);
+  return bindActionCreators({ fetchCar: fetchCar, fetchOwners: fetchOwners, deleteCar: deleteCar }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarsShow);

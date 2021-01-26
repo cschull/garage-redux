@@ -2,7 +2,7 @@
 export const FETCH_OWNERS = "FETCH_OWNERS";
 export const CREATE_OWNER = "CREATE_OWNER";
 export const FETCH_CAR = "FETCH_CAR";
-
+export const DELETE_CAR = "DELETE_CAR";
 
 const BASE_URL = "https://wagon-garage-api.herokuapp.com";
 
@@ -21,12 +21,16 @@ export function fetchOwners(garage) {
     });
 }
 
+export function fetchCar(id) {
+  const promise = fetch(`${BASE_URL}/cars/${id}`)
+    .then(response => response.json());
+  return {
+    type: FETCH_CAR,
+    payload: promise
+  };
+}
+
 export function createOwner(garage, body, callback) {
-  console.log("POST info:");
-  console.log(`garage: ${garage}`);
-  console.log("body:");
-  console.log(body);
-  console.log(`callback: ${callback}`);
   const url = `${BASE_URL}/${garage}/cars`;
   const request = fetch(url, {
     method: 'POST',
@@ -43,11 +47,14 @@ export function createOwner(garage, body, callback) {
   };
 }
 
-export function fetchCar(id) {
-  const promise = fetch(`${BASE_URL}/cars/${id}`)
-    .then(response => response.json());
+export function deleteCar(history, car) {
+  const url = `${BASE_URL}/cars/${car.id}`;
+  const request = fetch(url, { method: 'DELETE'})
+    .then(r => r.json())
+    .then(() => history.push(""));
+
   return {
-    type: FETCH_CAR,
-    payload: promise
+    type: DELETE_CAR,
+    payload: car
   };
 }
