@@ -9,6 +9,7 @@ export default function (state = null, action) {
       return [ action.payload ];
     }
     case DELETE_CAR: {
+      // taking out the car that matches the action.payload
       return state.filter((car) => car !== action.payload);
     }
     default: {

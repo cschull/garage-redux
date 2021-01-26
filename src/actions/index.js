@@ -51,7 +51,7 @@ export function deleteCar(history, car) {
   const url = `${BASE_URL}/cars/${car.id}`;
   const request = fetch(url, { method: 'DELETE'})
     .then(r => r.json())
-    .then(() => history.push(""));
+    .then(() => history.push("/"));
 
   return {
     type: DELETE_CAR,
