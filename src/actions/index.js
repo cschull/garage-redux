@@ -1,11 +1,13 @@
 // TODO: add and export your own actions
 export const FETCH_OWNERS = "FETCH_OWNERS";
 export const CREATE_OWNER = "CREATE_OWNER";
+export const FETCH_CAR = "FETCH_CAR";
 
 
 const BASE_URL = "https://wagon-garage-api.herokuapp.com";
 
 export function fetchOwners(garage) {
+  console.log('i am fetching all cars');
   return fetch(`${BASE_URL}/${garage}/cars`)
     .then(response => response.json())
     .then((data) => {
@@ -38,5 +40,14 @@ export function createOwner(garage, body, callback) {
   return {
     type: CREATE_OWNER,
     payload: request
+  };
+}
+
+export function fetchCar(id) {
+  const promise = fetch(`${BASE_URL}/cars/${id}`)
+    .then(response => response.json());
+  return {
+    type: FETCH_CAR,
+    payload: promise
   };
 }

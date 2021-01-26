@@ -18,6 +18,7 @@ import ownersReducer from './reducers/owners_reducer';
 // import containers
 import CarsNew from './containers/cars_new';
 import CarsIndex from './containers/cars_index';
+import CarsShow from './containers/cars_show';
 
 
 import '../assets/stylesheets/application.scss';
@@ -52,6 +53,7 @@ ReactDOM.render(
       <Switch>
         <Route path="/" exact component={CarsIndex} />
         <Route path="/cars/new" exact component={CarsNew} />
+        <Route path="/cars/:id" component={CarsShow} />
       </Switch>
     </Router>
   </Provider>,

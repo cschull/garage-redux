@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 
 // import field packages
-import { Link } from 'react-router-dom';
+import { reduxForm, Field } from 'redux-form';
 
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
 
 // import actions from reducer
 import { createOwner } from '../actions';

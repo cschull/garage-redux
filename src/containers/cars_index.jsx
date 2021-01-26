@@ -3,7 +3,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+// actions
 import { fetchOwners } from '../actions';
+
+// ability to link
 import { Link } from 'react-router-dom';
 
 class CarsIndex extends Component {
@@ -16,10 +19,12 @@ class CarsIndex extends Component {
   renderOwners() {
     return this.props.owners.map((owner) => {
       return (
-        <div className="owner-card" key={owner.id}>
-          <h5><strong>{owner.brand}-{owner.model}</strong></h5>
-          <p><strong>Owner:</strong> {owner.owner}</p>
-        </div>
+        <Link to={`/cars/${owner.id}`} key={owner.id}>
+          <div className="owner-card" >
+            <h5><strong>{owner.brand}-{owner.model}</strong></h5>
+            <p><strong>Owner:</strong> {owner.owner}</p>
+          </div>
+        </Link>
       );
     });
   }
